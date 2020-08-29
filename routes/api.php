@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\Set as SetResource;
+use App\Set;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/set', function () {
+    return SetResource::collection(Set::all());
 });
