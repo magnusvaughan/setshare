@@ -17,13 +17,17 @@
 </head>
 <body class="bg-gray-100 h-screen antialiased leading-none">
     <div id="app">
-        <nav class="bg-blue-900 shadow mb-0 py-6">
+        <nav class="bg-indigo-500 shadow mb-0 py-6">
             <div class="container mx-auto px-6 md:px-0">
                 <div class="flex items-center justify-center">
                     <div class="mr-6">
-                        <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-100 no-underline">
+
+                    <h1 class="text-2xl font-bold leading-7 text-white sm:text-3xl sm:leading-9 sm:truncate">
+                        <a href="{{ url('/') }}">
                             {{ config('app.name', 'Laravel') }}
                         </a>
+                    </h1>
+
                     </div>
                     <div class="flex-1 text-right">
                         @guest
@@ -33,7 +37,6 @@
                             @endif
                         @else
                             <span class="text-gray-300 text-sm pr-4">{{ Auth::user()->name }}</span>
-
                             <a href="{{ route('logout') }}"
                                class="no-underline hover:underline text-gray-300 text-sm p-3"
                                onclick="event.preventDefault();
@@ -46,7 +49,6 @@
                 </div>
             </div>
         </nav>
-
         @yield('content')
     </div>
     <script type="text/javascript" src="js/app.js"></script>
