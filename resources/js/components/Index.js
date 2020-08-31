@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Login from './Login'
 import Home from './Home'
 import UserSets from './UserSets'
 import {
@@ -10,37 +11,6 @@ import {
 } from "react-router-dom";
 
 class Index extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-          sets: [],
-          isLoaded: false
-        };
-      }
-    
-      componentDidMount() {
-        fetch("http://setshare.test/api/set")
-          .then(res => res.json())
-          .then(
-            (result) => {
-              this.setState({
-                isLoaded: true,
-                sets: result.data
-              });
-            },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
-            (error) => {
-              this.setState({
-                isLoaded: true,
-                error
-              });
-            }
-          )
-      }
-
     render() {
 
         return (
@@ -64,6 +34,7 @@ class Index extends React.Component {
                                 <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                                     <div className="hidden sm:block sm:ml-6">
                                         <div className="flex">
+                                            <Link to="/login" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Login</Link>
                                             <Link to="/" className="px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-indigo-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Home</Link>
                                             <Link to="/sets" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">All sets</Link>
                                         </div>
@@ -74,6 +45,7 @@ class Index extends React.Component {
     
                         <div className="hidden sm:hidden">
                             <div className="px-2 pt-2 pb-3">
+                                <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Login</a>
                                 <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Home</a>
                                 <a href="#" className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">All sets</a>
                             </div>
@@ -81,8 +53,11 @@ class Index extends React.Component {
                     </nav>
     
                     <Switch>
-                        <Route path="/sets">
+                    <Route path="/sets">
                             <UserSets />
+                        </Route>
+                        <Route path="/login">
+                            <Login />
                         </Route>
                         <Route path="/">
                             <Home />

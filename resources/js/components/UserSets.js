@@ -78,7 +78,7 @@ class UserSets extends React.Component {
                     <div className="bg-cover bg-center w-10 h-10 rounded-full mr-3" style={{ backgroundImage: 'url(/img/mag-portrait.jpg)' }}>
                     </div>
                     <div>
-                      <p className="font-bold text-gray-900">Tiffany Heffner</p>
+                      <p className="font-bold text-gray-900">Magnus Vaughan</p>
                     </div>
                   </div>
                 </div>

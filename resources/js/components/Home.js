@@ -1,21 +1,50 @@
 import React from 'react';
+import axios from 'axios';
 
-function Home() {
+axios.defaults.baseURL = 'http://setshare.test'
 
-    return (
 
+class Home extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          user: [],
+          isLoaded: false
+        };
+    }
+
+    componentDidMount() {
+        axios.get('/api/user')
+        .then(response => {
+            console.log(response);
+            this.setState({
+                user: response.data,
+                isLoaded:true
+            })
+        });
+    }
+
+    render() {
+
+        if(!this.state.isLoaded){
+            return <h1>Loading</h1>
+        }
+
+        return (
             <div className="flex items-center">
                 <div className="md:w-1/2 md:mx-auto">
                     <div className="py-12 bg-white">
                         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="lg:text-center">
+                            <h1>{this.state.user.name}</h1>
                                 <p className="text-base leading-6 text-indigo-600 font-semibold tracking-wide uppercase">Share your sets</p>
                                 <h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
                                     Upload and download great Ableton live sets
-    </h3>
+</h3>
                                 <p className="mt-4 max-w-2xl text-xl leading-7 text-gray-500 lg:mx-auto">
                                     Techno, techno techno, techno.
-    </p>
+</p>
                             </div>
 
                             <div className="mt-10">
@@ -33,7 +62,7 @@ function Home() {
                                                 <h4 className="text-lg leading-6 font-medium text-gray-900">Ableton-only projects keep file size small</h4>
                                                 <p className="mt-2 text-base leading-6 text-gray-500">
                                                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
-                    </p>
+                </p>
                                             </div>
                                         </div>
                                     </li>
@@ -50,7 +79,7 @@ function Home() {
                                                 <h4 className="text-lg leading-6 font-medium text-gray-900">Filter by genre, bpm, and more</h4>
                                                 <p className="mt-2 text-base leading-6 text-gray-500">
                                                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
-                    </p>
+                </p>
                                             </div>
                                         </div>
                                     </li>
@@ -67,7 +96,7 @@ function Home() {
                                                 <h4 className="text-lg leading-6 font-medium text-gray-900">Find like-minded people to make music with</h4>
                                                 <p className="mt-2 text-base leading-6 text-gray-500">
                                                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
-                    </p>
+                </p>
                                             </div>
                                         </div>
                                     </li>
@@ -84,7 +113,7 @@ function Home() {
                                                 <h4 className="text-lg leading-6 font-medium text-gray-900">Learn from the best.</h4>
                                                 <p className="mt-2 text-base leading-6 text-gray-500">
                                                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
-                    </p>
+                </p>
                                             </div>
                                         </div>
                                     </li>
@@ -95,7 +124,10 @@ function Home() {
                 </div>
             </div>
 
-    )
+        )
+
+    }
+
 
 }
 
