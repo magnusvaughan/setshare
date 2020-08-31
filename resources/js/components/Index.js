@@ -9,12 +9,14 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    NavLink,
+    Redirect
 } from "react-router-dom";
 
 class Index extends React.Component {
 
     constructor(props) {
+        console.log(sessionStorage.getItem('loggedIn') == 'true');
         const loggedIn = sessionStorage.getItem('loggedIn') == 'true';
         super(props);
         this.state = {
@@ -40,6 +42,12 @@ class Index extends React.Component {
                     isLoggedIn: false
                 })
                 sessionStorage.setItem('loggedIn', false);
+                <Redirect
+                to={{
+                  pathname: "/login",
+                  state: { from: location }
+                }}
+              />
             }
         })
     };
@@ -70,14 +78,14 @@ class Index extends React.Component {
                                     <div className="hidden sm:block sm:ml-6">
                                         <div className="flex">
                                             {!isLoggedIn &&
-                                                <Link to="/login" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Login</Link>
+                                                <NavLink to="/login" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Login</NavLink>
                                             }
                                             {isLoggedIn &&
                                             <div>
-                                                <Link to="/" className="px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-indigo-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Home</Link>
-                                                <Link to="/sets" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">All sets</Link>
-                                                <Link to="/test" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Test</Link>
-                                                <button onClick={this.logout} className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Logout</button>
+                                                <NavLink exact={true} to="/" activeClassName="bg-indigo-700" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out">Home</NavLink>
+                                                <NavLink to="/sets" activeClassName="bg-indigo-700" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out">All sets</NavLink>
+                                                <NavLink to="/test" activeClassName="bg-indigo-700" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out">Test</NavLink>
+                                                <button onClick={this.logout} className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out">Logout</button>
                                             </div>
                                             }
                                         </div>

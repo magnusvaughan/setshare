@@ -42,9 +42,9 @@ class UserSets extends React.Component {
 
     return (
 
-      sets.map(set => (
         < div className="max-w-6xl mx-auto" >
           <div class="flex mb-4">
+          {sets.map(set => (
             <div className="max-w-sm w-full sm:w-1/2 lg:w-1/3 py-6 px-3">
               <div className="bg-white shadow-xl rounded-lg overflow-hidden">
                 <div className="bg-cover bg-center h-56 p-4" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1562369083-e501b585fd2c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)' }}>
@@ -84,10 +84,13 @@ class UserSets extends React.Component {
                 </div>
               </div>
             </div>
+
+
+            ))}
           </div>
         </div >
 
-      ))
+
 
     );
   }

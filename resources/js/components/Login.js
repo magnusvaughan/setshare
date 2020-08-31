@@ -32,57 +32,52 @@ const Login = (props) => {
             });
     }
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card mt-8">
-                        <div className="card-header">Login</div>
+        <div class="container mx-auto">
+        <div class="flex flex-wrap justify-center">
+            <div class="w-full max-w-sm">
+                <div class="flex flex-col break-words bg-white border-2 rounded shadow-md  mt-6">
 
-                        <div className="card-body">
-                            <form onSubmit={handleSubmit}>
+                        <div className="font-semibold bg-indigo-500 text-white py-3 px-6 mb-0">Login</div>
 
-                                <div className="form-group row">
-                                    <label for="email" className="col-md-4 col-form-label text-md-right">Email</label>
+                            <form className="w-full p-6" onSubmit={handleSubmit}>
 
-                                    <div className="col-md-6">
-                                        <input className="form-control"
-                                            type="email"
-                                            name="email"
-                                            placeholder="Email"
-                                            value={email}
-                                            onChange={e => setEmail(e.target.value)}
-                                            required
-                                            autofocus
-                                        />
+                                <div className="flex flex-wrap mb-6">
+                                    <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email</label>
 
-                                    </div>
+
+                                    <input className="form-input w-full shadow py-2 px-3"
+                                        type="email"
+                                        name="email"
+                                        placeholder=""
+                                        value={email}
+                                        onChange={e => setEmail(e.target.value)}
+                                        required
+                                        autoocus
+                                    />
+
+
                                 </div>
 
-                                <div className="form-group row">
-                                    <label for="email" className="col-md-4 col-form-label text-md-right">Email</label>
-
-                                    <div className="col-md-6">
-                                        <input className="form-control"
-                                            type="password"
-                                            name="password"
-                                            placeholder="Password"
-                                            value={password}
-                                            onChange={e => setPassword(e.target.value)}
-                                            required
-                                        />
-
-                                    </div>
+                                <div className="flex flex-wrap mb-6">
+                                    <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                                    <input className="form-input w-full shadow py-2 px-3"
+                                        type="password"
+                                        name="password"
+                                        placeholder=""
+                                        value={password}
+                                        onChange={e => setPassword(e.target.value)}
+                                        required
+                                    />
                                 </div>
                                 <div className="form-group row mb-0">
-                                    <div className="col-md-8 offset-md-4">
-                                        <button type="submit" className="btn btn-primary">
+                                    <div className="flex flex-wrap items-center">
+                                        <button type="submit" className="bg-indigo-500 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                                             Login
                                         </button>
 
                                     </div>
                                 </div>
                             </form>
-                        </div>
                     </div>
                 </div>
             </div>
