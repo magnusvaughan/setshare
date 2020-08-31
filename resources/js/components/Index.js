@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Login from './Login'
 import Home from './Home'
+import Test from './Test'
 import UserSets from './UserSets'
+import PrivateRoute from './PrivateRoute'
 import {
     BrowserRouter as Router,
     Switch,
@@ -11,12 +13,45 @@ import {
 } from "react-router-dom";
 
 class Index extends React.Component {
+
+    constructor(props) {
+        const loggedIn = sessionStorage.getItem('loggedIn') == 'true';
+        super(props);
+        this.state = {
+            user: [],
+            isLoaded: false,
+            isLoggedIn: loggedIn
+        };
+        this.login = this.login.bind(this)
+        this.logout = this.logout.bind(this)
+    }
+
+    login() {
+        this.setState({
+            isLoggedIn: true
+        })
+        sessionStorage.setItem('loggedIn', true);
+    };
+
+    logout() {
+        axios.post('/logout').then(response => {
+            if (response.status === 204) {
+                this.setState({
+                    isLoggedIn: false
+                })
+                sessionStorage.setItem('loggedIn', false);
+            }
+        })
+    };
+
     render() {
+
+        const { isLoggedIn } = this.state;
 
         return (
 
             <div>
-    
+
                 <Router>
                     <nav className="bg-indigo-500">
                         <div className="md:w-1/2 md:mx-auto">
@@ -34,15 +69,23 @@ class Index extends React.Component {
                                 <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                                     <div className="hidden sm:block sm:ml-6">
                                         <div className="flex">
-                                            <Link to="/login" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Login</Link>
-                                            <Link to="/" className="px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-indigo-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Home</Link>
-                                            <Link to="/sets" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">All sets</Link>
+                                            {!isLoggedIn &&
+                                                <Link to="/login" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Login</Link>
+                                            }
+                                            {isLoggedIn &&
+                                            <div>
+                                                <Link to="/" className="px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-indigo-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Home</Link>
+                                                <Link to="/sets" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">All sets</Link>
+                                                <Link to="/test" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Test</Link>
+                                                <button onClick={this.logout} className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Logout</button>
+                                            </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-    
+
                         <div className="hidden sm:hidden">
                             <div className="px-2 pt-2 pb-3">
                                 <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Login</a>
@@ -51,21 +94,24 @@ class Index extends React.Component {
                             </div>
                         </div>
                     </nav>
-    
+
                     <Switch>
-                    <Route path="/sets">
-                            <UserSets />
-                        </Route>
                         <Route path="/login">
-                            <Login />
+                            <Login login={this.login}/>
                         </Route>
-                        <Route path="/">
+                        <Route exact path="/">
                             <Home />
                         </Route>
+                        <Route path="/test">
+                            <Test />
+                        </Route>
+                        <PrivateRoute path="/sets" loggedIn={this.state.isLoggedIn}>
+                            <UserSets />
+                        </PrivateRoute>
                     </Switch>
                 </Router>
             </div>
-    
+
         );
 
     }

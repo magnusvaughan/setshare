@@ -9,8 +9,9 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          user: [],
-          isLoaded: false
+            loggedIn: false,
+            user: [],
+            isLoaded: false
         };
     }
 
