@@ -7,7 +7,7 @@ import {
 
 axios.defaults.baseURL = 'http://setshare.test'
 
-const Login = (props) => {
+const Login = ({ login }) => {
     let history = useHistory();
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
@@ -25,7 +25,7 @@ const Login = (props) => {
                 }).then(response => {
                     console.log(response.status)
                     if (response.status === 200 || response.status === 204) {
-                        props.login();
+                        login();
                         history.replace(from);
                     }
                 })
