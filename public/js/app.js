@@ -51961,21 +51961,21 @@ function CreateSet(props) {
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "container mx-auto"
+    className: "container mx-auto"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "flex flex-wrap justify-center"
+    className: "flex flex-wrap justify-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "w-full max-w-xs"
+    className: "w-full max-w-xs"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: handleSubmit,
-    "class": "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-6"
+    className: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "mb-4"
+    className: "mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    "class": "block text-gray-700 text-sm font-bold mb-2",
-    "for": "username"
+    className: "block text-gray-700 text-sm font-bold mb-2",
+    htmlFor: "username"
   }, "Set name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    "class": "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+    className: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
     id: "set-name",
     type: "text",
     placeholder: "Set name",
@@ -51984,12 +51984,12 @@ function CreateSet(props) {
       return setName(e.target.value);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "mb-6"
+    className: "mb-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    "class": "block text-gray-700 text-sm font-bold mb-2",
-    "for": "password"
+    className: "block text-gray-700 text-sm font-bold mb-2",
+    htmlFor: "password"
   }, "BPM"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    "class": "shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline",
+    className: "shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline",
     id: "bpm",
     type: "text",
     placeholder: "125",
@@ -51998,19 +51998,19 @@ function CreateSet(props) {
       return setBpm(e.target.value);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    "class": "text-red-500 text-xs italic"
+    className: "text-red-500 text-xs italic"
   }, "Enter your track BPM")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FileUploader__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onFileSelect: function onFileSelect(file) {
       return setSelectedFile(file);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "flex items-center justify-between"
+    className: "flex items-center justify-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    "class": "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
+    className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
     type: "submit",
     value: "Submit"
   }, "Create new set"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    "class": "text-center text-gray-500 text-xs"
+    className: "text-center text-gray-500 text-xs"
   }, "\xA92020 Setshare. All rights reserved."))));
 }
 /* harmony default export */ __webpack_exports__["default"] = (CreateSet);
@@ -52040,12 +52040,12 @@ var FileUploader = function FileUploader(_ref) {
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "mb-6"
+    className: "mb-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    "class": "block text-gray-700 text-sm font-bold mb-2",
-    "for": "password"
+    className: "block text-gray-700 text-sm font-bold mb-2",
+    htmlFor: "password"
   }, "Set file"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    "class": "shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline",
+    className: "shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline",
     id: "set-file",
     type: "file",
     onChange: handleFileInput
@@ -52055,7 +52055,7 @@ var FileUploader = function FileUploader(_ref) {
     },
     className: "btn btn-primary"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    "class": "text-red-500 text-xs italic"
+    className: "text-red-500 text-xs italic"
   }, "Ensure your file is zipped"));
 };
 

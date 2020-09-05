@@ -9,16 +9,16 @@ const FileUploader = ({ onFileSelect }) => {
     }
 
     return (
-        <div class="mb-6">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+        <div className="mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                 Set file
             </label>
-            <input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="set-file" type="file"
+            <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="set-file" type="file"
                 onChange={handleFileInput}
 
             />
             <button onClick={e => fileInput.current && fileInput.current.click()} className="btn btn-primary"></button>
-            <p class="text-red-500 text-xs italic">Ensure your file is zipped</p>
+            <p className="text-red-500 text-xs italic">Ensure your file is zipped</p>
         </div>
     )
 }
