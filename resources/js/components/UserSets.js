@@ -1,4 +1,11 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+  Redirect
+} from "react-router-dom";
 
 class UserSets extends React.Component {
 
@@ -37,7 +44,7 @@ class UserSets extends React.Component {
     const { sets, isLoaded } = this.state;
 
     if (!isLoaded) {
-      return <h1>Loading...</h1>
+      return <p>Loading</p>
     }
 
     return (
@@ -87,7 +94,9 @@ class UserSets extends React.Component {
 
 
             ))}
+
           </div>
+          <NavLink exact={true} to="/CreateSet" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Upload new set</NavLink>
         </div >
 
 

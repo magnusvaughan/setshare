@@ -5,6 +5,7 @@ import Home from './Home'
 import Test from './Test'
 import UserSets from './UserSets'
 import PrivateRoute from './PrivateRoute'
+import CreateSet from './CreateSet'
 import {
     BrowserRouter as Router,
     Switch,
@@ -91,6 +92,9 @@ function Index(){
                 </PrivateRoute>
                 <PrivateRoute path="/sets" loggedIn={isLoggedIn}>
                     <UserSets />
+                </PrivateRoute>
+                <PrivateRoute path="/createset" loggedIn={isLoggedIn}>
+                    <CreateSet />
                 </PrivateRoute>
             </Switch>
         </Router>
