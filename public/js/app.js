@@ -51923,6 +51923,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateSet", function() { return CreateSet; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _FileUploader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FileUploader */ "./resources/js/components/FileUploader.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -51936,6 +51937,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+
 function CreateSet(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState2 = _slicedToArray(_useState, 2),
@@ -51947,14 +51949,14 @@ function CreateSet(props) {
       bpm = _useState4[0],
       setBpm = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(undefined),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState6 = _slicedToArray(_useState5, 2),
-      projectFile = _useState6[0],
-      setProjectFile = _useState6[1];
+      selectedFile = _useState6[0],
+      setSelectedFile = _useState6[1];
 
   var handleSubmit = function handleSubmit(evt) {
     evt.preventDefault();
-    console.log(name, bpm, projectFile);
+    console.log(name, bpm, selectedFile);
     alert("Submitting Name ".concat(name));
   };
 
@@ -51997,22 +51999,11 @@ function CreateSet(props) {
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     "class": "text-red-500 text-xs italic"
-  }, "Enter your track BPM")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "mb-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    "class": "block text-gray-700 text-sm font-bold mb-2",
-    "for": "password"
-  }, "Set file"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    "class": "shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline",
-    id: "set-file",
-    type: "file",
-    value: projectFile,
-    onChange: function onChange(e) {
-      return setProjectFile(e.target.files);
+  }, "Enter your track BPM")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FileUploader__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    onFileSelect: function onFileSelect(file) {
+      return setSelectedFile(file);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    "class": "text-red-500 text-xs italic"
-  }, "Ensure your file is zipped")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     "class": "flex items-center justify-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     "class": "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
@@ -52023,6 +52014,52 @@ function CreateSet(props) {
   }, "\xA92020 Setshare. All rights reserved."))));
 }
 /* harmony default export */ __webpack_exports__["default"] = (CreateSet);
+
+/***/ }),
+
+/***/ "./resources/js/components/FileUploader.js":
+/*!*************************************************!*\
+  !*** ./resources/js/components/FileUploader.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var FileUploader = function FileUploader(_ref) {
+  var onFileSelect = _ref.onFileSelect;
+  var fileInput = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+
+  var handleFileInput = function handleFileInput(e) {
+    // handle validations
+    onFileSelect(e.target.files[0]);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    "class": "mb-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    "class": "block text-gray-700 text-sm font-bold mb-2",
+    "for": "password"
+  }, "Set file"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    "class": "shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline",
+    id: "set-file",
+    type: "file",
+    onChange: handleFileInput
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: function onClick(e) {
+      return fileInput.current && fileInput.current.click();
+    },
+    className: "btn btn-primary"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    "class": "text-red-500 text-xs italic"
+  }, "Ensure your file is zipped"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FileUploader);
 
 /***/ }),
 
