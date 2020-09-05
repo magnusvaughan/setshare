@@ -7,6 +7,9 @@ import {
 } from "react-router-dom";
 
 axios.defaults.baseURL = 'http://setshare.test'
+const config = { headers: {
+    'Content-Type': "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2)
+  }};
 
 export function CreateSet(props) {
   const [name, setName] = useState("");
@@ -16,12 +19,14 @@ export function CreateSet(props) {
   const handleSubmit = (evt) => {
       evt.preventDefault();
       console.log(name, bpm, selectedFile)
-        axios.post('/api/set', {
-            name: name,
-            bpm: bpm,
-            user_id: '1',
-            download_url: name
-        }).then(response => {
+
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("bpm", bpm);
+      formData.append("user_id", '1');
+      formData.append("file", selectedFile);
+
+        axios.post('/api/set', formData, config).then(response => {
             console.log(response.status)
             console.log(response.status === 201)
             if (response.status === 201) {

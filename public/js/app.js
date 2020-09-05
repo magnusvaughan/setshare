@@ -51944,6 +51944,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.baseURL = 'http://setshare.test';
+var config = {
+  headers: {
+    'Content-Type': "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2)
+  }
+};
 function CreateSet(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState2 = _slicedToArray(_useState, 2),
@@ -51963,12 +51968,12 @@ function CreateSet(props) {
   var handleSubmit = function handleSubmit(evt) {
     evt.preventDefault();
     console.log(name, bpm, selectedFile);
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/set', {
-      name: name,
-      bpm: bpm,
-      user_id: '1',
-      download_url: name
-    }).then(function (response) {
+    var formData = new FormData();
+    formData.append("name", name);
+    formData.append("bpm", bpm);
+    formData.append("user_id", '1');
+    formData.append("file", selectedFile);
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/set', formData, config).then(function (response) {
       console.log(response.status);
       console.log(response.status === 201);
 

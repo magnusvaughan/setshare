@@ -35,7 +35,13 @@ class SetController extends Controller
      */
     public function store(Request $request)
     {
-        return Set::create($request->all());
+        $set = new Set();
+        $set->name = $request->name;
+        $set->bpm = $request->bpm;
+        $set->user_id = $request->user_id;
+        $path = $request->file->store('sets');
+        $set->download_url = $path;
+        return $set->save();
     }
 
     /**
