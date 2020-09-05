@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 import FileUploader from './FileUploader'
+import axios from 'axios';
+import {
+    BrowserRouter as Router,
+    Redirect
+} from "react-router-dom";
+
+axios.defaults.baseURL = 'http://setshare.test'
 
 export function CreateSet(props) {
   const [name, setName] = useState("");
@@ -9,7 +16,23 @@ export function CreateSet(props) {
   const handleSubmit = (evt) => {
       evt.preventDefault();
       console.log(name, bpm, selectedFile)
-      alert(`Submitting Name ${name}`)
+        axios.post('/api/set', {
+            name: name,
+            bpm: bpm,
+            user_id: '1',
+            download_url: name
+        }).then(response => {
+            console.log(response.status)
+            console.log(response.status === 201)
+            if (response.status === 201) {
+                <Redirect
+                to={{
+                  pathname: "/sets",
+                }}
+              />
+            }
+
+      })
   }
   return (
 

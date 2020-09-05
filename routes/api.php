@@ -20,10 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->get('/set', function () {
-    return SetResource::collection(Set::all());
-});
+Route::middleware('auth:sanctum')->post('/set', 'SetController@store');
 
-Route::middleware('auth:sanctum')->post('/set', function () {
+Route::middleware('auth:sanctum')->get('/set', function () {
     return SetResource::collection(Set::all());
 });
