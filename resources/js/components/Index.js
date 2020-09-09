@@ -15,8 +15,26 @@ import {
 } from "react-router-dom";
 
 function Index(){
-    const cookie = sessionStorage.getItem('loggedIn') === 'true';
-    const [isLoggedIn, setIsLoggedIn] = React.useState(cookie)
+
+    const [isLoaded, setIsLoaded] = React.useState(false)
+
+    const getLoggedInStatus = () => {
+        let loggedInStatus = false;
+         axios.get('/api/user')
+            .then(response => {
+            console.log('response', response)
+            if(response.status == 200){
+                setIsLoggedIn(true);
+            }
+            setIsLoaded(true)
+        })
+        .catch(function (error) {
+            setIsLoggedIn(false)
+            setIsLoaded(true)
+          })
+    }
+
+    const [isLoggedIn, setIsLoggedIn] = React.useState(getLoggedInStatus())
 
     const login = () => {
         setIsLoggedIn(true)
@@ -35,6 +53,12 @@ function Index(){
               />
             }
         })
+    }
+
+    if(!isLoaded) {
+        return (
+            <h1>Loading...</h1>
+        )
     }
 
     return (

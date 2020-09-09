@@ -52338,12 +52338,31 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Index() {
-  var cookie = sessionStorage.getItem('loggedIn') === 'true';
-
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(cookie),
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
-      isLoggedIn = _React$useState2[0],
-      setIsLoggedIn = _React$useState2[1];
+      isLoaded = _React$useState2[0],
+      setIsLoaded = _React$useState2[1];
+
+  var getLoggedInStatus = function getLoggedInStatus() {
+    var loggedInStatus = false;
+    axios.get('/api/user').then(function (response) {
+      console.log('response', response);
+
+      if (response.status == 200) {
+        setIsLoggedIn(true);
+      }
+
+      setIsLoaded(true);
+    })["catch"](function (error) {
+      setIsLoggedIn(false);
+      setIsLoaded(true);
+    });
+  };
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(getLoggedInStatus()),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      isLoggedIn = _React$useState4[0],
+      setIsLoggedIn = _React$useState4[1];
 
   var login = function login() {
     setIsLoggedIn(true);
@@ -52368,6 +52387,10 @@ function Index() {
       }
     });
   };
+
+  if (!isLoaded) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Loading...");
+  }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     className: "bg-indigo-500"
