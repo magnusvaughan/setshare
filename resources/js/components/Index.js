@@ -22,7 +22,6 @@ function Index(){
         let loggedInStatus = false;
          axios.get('/api/user')
             .then(response => {
-            console.log('response', response)
             if(response.status == 200){
                 setIsLoggedIn(true);
             }

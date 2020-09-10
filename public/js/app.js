@@ -52346,8 +52346,6 @@ function Index() {
   var getLoggedInStatus = function getLoggedInStatus() {
     var loggedInStatus = false;
     axios.get('/api/user').then(function (response) {
-      console.log('response', response);
-
       if (response.status == 200) {
         setIsLoggedIn(true);
       }
