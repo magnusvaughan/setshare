@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import FileUploader from './FileUploader'
 import axios from 'axios';
-import {
-    BrowserRouter as Router,
-    Redirect
-} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 axios.defaults.baseURL = 'http://setshare.test'
 const config = { headers: {
     'Content-Type': "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2)
   }};
 
-export function CreateSet(props) {
+const CreateSet = () => {
   const [name, setName] = useState("");
   const [bpm, setBpm] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const history = useHistory();
   
   const handleSubmit = (evt) => {
       evt.preventDefault();
@@ -29,12 +27,8 @@ export function CreateSet(props) {
         axios.post('/api/set', formData, config).then(response => {
             console.log(response.status)
             console.log(response.status === 201)
-            if (response.status === 201) {
-                <Redirect
-                to={{
-                  pathname: "/sets",
-                }}
-              />
+            if (response.status === 201 || response.status === 200) {
+                history.push("/sets");
             }
 
       })

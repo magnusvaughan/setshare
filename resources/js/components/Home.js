@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import LoadingSpinner from './LoadingSpinner'
 
 axios.defaults.baseURL = 'http://setshare.test'
 
@@ -29,7 +30,9 @@ class Home extends React.Component {
     render() {
 
         if(!this.state.isLoaded){
-            return <h1>Loading</h1>
+            return (
+                <LoadingSpinner />
+            )
         }
 
         return (

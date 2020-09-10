@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingSpinner from './LoadingSpinner'
 import {
   BrowserRouter as Router,
   Switch,
@@ -44,15 +45,14 @@ class UserSets extends React.Component {
     const { sets, isLoaded } = this.state;
 
     if (!isLoaded) {
-      return <p>Loading</p>
+      <LoadingSpinner />
     }
 
     return (
-
-        < div className="max-w-6xl mx-auto" >
-          {sets.map(set => (
-          <div class="flex mb-4">
-            <div className="max-w-6xl w-full py-6 px-3">
+      < div className="max-w-6xl mx-auto" >
+        <div className="flex flex-wrap mb-4">
+          {sets.map((set, index) => (
+            <div key={index} className="max-w-sm w-full sm:w-full lg:w-full py-6 px-3">
               <div className="bg-white shadow-xl rounded-lg overflow-hidden">
                 <div className="bg-cover bg-center h-56 p-4" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1562369083-e501b585fd2c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)' }}>
                   <div className="flex justify-end">
@@ -83,26 +83,26 @@ class UserSets extends React.Component {
                   <div className="text-xs uppercase font-bold text-gray-600 tracking-wide">Created by</div>
                   <div className="flex items-center justify-between pt-2">
                     <div className="flex items-center">
-                    <div className="bg-cover bg-center w-10 h-10 rounded-full mr-3" style={{ backgroundImage: 'url(/img/mag-portrait.jpg)' }}>
-                    </div>
+                      <div className="bg-cover bg-center w-10 h-10 rounded-full mr-3" style={{ backgroundImage: 'url(/img/mag-portrait.jpg)' }}>
+                      </div>
                       <p className="font-bold text-gray-900">Magnus Vaughan</p>
                     </div>
                     <a href={set.download_url} download={set.name}>
-                    <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center">
-                      <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
-                      <span>Download</span>
-                    </button>
-                    </a> 
+                      <button className="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center">
+                        <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" /></svg>
+                        <span>Download</span>
+                      </button>
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
           ))}
-          <div class="flex mb-4">
-                <NavLink exact={true} to="/CreateSet" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Upload new set</NavLink>
-            </div>
-        </div >
+        </div>
+        <div className="flex mb-4">
+          <NavLink exact={true} to="/CreateSet" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Upload new set</NavLink>
+        </div>
+      </div >
 
 
 

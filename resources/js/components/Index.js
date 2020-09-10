@@ -6,6 +6,7 @@ import Test from './Test'
 import UserSets from './UserSets'
 import PrivateRoute from './PrivateRoute'
 import CreateSet from './CreateSet'
+import LoadingSpinner from './LoadingSpinner'
 import {
     BrowserRouter as Router,
     Switch,
@@ -56,7 +57,7 @@ function Index(){
 
     if(!isLoaded) {
         return (
-            <h1>Loading...</h1>
+            <LoadingSpinner />
         )
     }
 
