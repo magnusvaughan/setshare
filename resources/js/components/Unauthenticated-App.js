@@ -1,36 +1,14 @@
 import React from 'react';
-import axios from 'axios';
 
-import {
-    useHistory,
-    useLocation
-} from "react-router-dom";
+import {useAuth} from './context/auth-context'
 
-axios.defaults.baseURL = 'http://setshare.test'
 
-const Login = ({ login }) => {
-    let history = useHistory();
-    let location = useLocation();
-    let { from } = location.state || { from: { pathname: "/" } };
+function UnAuthenticatedApp() {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        axios.get('/sanctum/csrf-cookie')
-            .then(response => {
-                console.log('CSRF response', response);
-                axios.post('/login', {
-                    email: email,
-                    password: password
-                }).then(response => {
-                    console.log(response.status)
-                    if (response.status === 200 || response.status === 204) {
-                        login();
-                        history.replace(from);
-                    }
-                })
-            });
-    }
+    const {login} = useAuth();
+
+
     return (
         <div class="container mx-auto">
         <div class="flex flex-wrap justify-center">
@@ -39,7 +17,7 @@ const Login = ({ login }) => {
 
                         <div className="font-semibold bg-indigo-500 text-white py-3 px-6 mb-0">Login</div>
 
-                            <form className="w-full p-6" onSubmit={handleSubmit}>
+                            <form className="w-full p-6" onSubmit={login}>
 
                                 <div className="flex flex-wrap mb-6">
                                     <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email</label>
@@ -85,4 +63,4 @@ const Login = ({ login }) => {
     );
 }
 
-export default Login;
+export default UnAuthenticatedApp;
