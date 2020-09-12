@@ -28,7 +28,7 @@ const CreateSet = () => {
             console.log(response.status)
             console.log(response.status === 201)
             if (response.status === 201 || response.status === 200) {
-                history.push("/sets");
+                history.push("/");
             }
 
       })

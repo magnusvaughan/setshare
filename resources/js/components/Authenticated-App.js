@@ -1,9 +1,5 @@
 import React, { useContext } from 'react';
-import Login from './Login'
-import Home from './Home'
-import Test from './Test'
 import UserSets from './UserSets'
-import PrivateRoute from './PrivateRoute'
 import CreateSet from './CreateSet'
 import {
     BrowserRouter as Router,
@@ -17,7 +13,7 @@ import { AuthContext } from './context/AuthContext'
 
 
 function AuthenticatedApp() {
-    console.log('authenticated app')
+
     const authContext = useContext(AuthContext)
     const history = useHistory();
 
@@ -52,9 +48,7 @@ function AuthenticatedApp() {
                             <div className="hidden sm:block sm:ml-6">
                                 <div className="flex">
                                     <div>
-                                        <NavLink exact={true} to="/" activeClassName="bg-indigo-700" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out">Home</NavLink>
-                                        <NavLink to="/sets" activeClassName="bg-indigo-700" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out">All sets</NavLink>
-                                        <NavLink to="/test" activeClassName="bg-indigo-700" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out">Test</NavLink>
+                                        <NavLink exact={true} to="/" activeClassName="bg-indigo-700" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out">My Sets</NavLink>
                                         <button onClick={logout} className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out">Logout</button>
                                     </div>
                                 </div>
@@ -65,13 +59,10 @@ function AuthenticatedApp() {
             </nav>
 
             <Switch>
+                <Route exact path="/login" >
+                    <Redirect to="/" />
+                </Route>
                 <Route exact path="/" >
-                    <Home />
-                </Route>
-                <Route path="/test">
-                    <Test />
-                </Route>
-                <Route path="/sets" >
                     <UserSets />
                 </Route>
                 <Route path="/createset">
