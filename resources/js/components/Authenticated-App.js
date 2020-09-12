@@ -28,6 +28,14 @@ function AuthenticatedApp() {
         )
     }
 
+    axios.get('/api/user')
+    .then(response => {
+        console.log('user found');
+    })
+    .catch(function (error) {
+        logout();
+    })
+
     return (
         <div>
         <Router>

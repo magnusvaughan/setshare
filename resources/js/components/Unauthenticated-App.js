@@ -47,9 +47,9 @@ function UnAuthenticatedApp() {
                 <Route exact path="/login" >
                     <Login />
                 </Route>
-                <Route path="/" >
+                {/* <Route path="/" >
                     <Redirect to="/" />
-                </Route>
+                </Route> */}
             </Switch>
         </Router>
     </div>

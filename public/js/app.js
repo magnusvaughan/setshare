@@ -51922,22 +51922,25 @@ window.axios.defaults.withCredentials = true;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _context_AuthContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./context/AuthContext */ "./resources/js/components/context/AuthContext.js");
-/* harmony import */ var _Authenticated_App_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Authenticated-App.js */ "./resources/js/components/Authenticated-App.js");
-/* harmony import */ var _Unauthenticated_App_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Unauthenticated-App.js */ "./resources/js/components/Unauthenticated-App.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _context_AuthContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./context/AuthContext */ "./resources/js/components/context/AuthContext.js");
+/* harmony import */ var _Authenticated_App_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Authenticated-App.js */ "./resources/js/components/Authenticated-App.js");
+/* harmony import */ var _Unauthenticated_App_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Unauthenticated-App.js */ "./resources/js/components/Unauthenticated-App.js");
 
 
 
 
+
+axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = 'http://setshare.test';
 
 function App() {
-  var authContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AuthContext__WEBPACK_IMPORTED_MODULE_1__["AuthContext"]);
-  console.log('Global auth state', authContext.authState.authenticated, Boolean(authContext.authState.authenticated));
+  var authContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AuthContext__WEBPACK_IMPORTED_MODULE_2__["AuthContext"]);
 
   if (authContext.authState.authenticated == 'false' || authContext.authState.authenticated == false) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Unauthenticated_App_js__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Unauthenticated_App_js__WEBPACK_IMPORTED_MODULE_4__["default"], null);
   } else {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Authenticated_App_js__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Authenticated_App_js__WEBPACK_IMPORTED_MODULE_3__["default"], null);
   }
 }
 
@@ -51979,6 +51982,11 @@ function AuthenticatedApp() {
     });
   };
 
+  axios.get('/api/user').then(function (response) {
+    console.log('user found');
+  })["catch"](function (error) {
+    logout();
+  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     className: "bg-indigo-500"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -52266,41 +52274,15 @@ var Home = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(Home);
 
-  function Home(props) {
-    var _this;
-
+  function Home() {
     _classCallCheck(this, Home);
 
-    _this = _super.call(this, props);
-    _this.state = {
-      loggedIn: false,
-      user: [],
-      isLoaded: false
-    };
-    return _this;
+    return _super.apply(this, arguments);
   }
 
   _createClass(Home, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/user').then(function (response) {
-        console.log(response);
-
-        _this2.setState({
-          user: response.data,
-          isLoaded: true
-        });
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
-      if (!this.state.isLoaded) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoadingSpinner__WEBPACK_IMPORTED_MODULE_2__["default"], null);
-      }
-
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "flex items-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -52311,7 +52293,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
         className: "max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "lg:text-center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-base leading-6 text-indigo-600 font-semibold tracking-wide uppercase"
       }, "Share your sets"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
@@ -52674,11 +52656,7 @@ function UnAuthenticatedApp() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Home__WEBPACK_IMPORTED_MODULE_2__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
     exact: true,
     path: "/login"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Login__WEBPACK_IMPORTED_MODULE_1__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-    path: "/"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
-    to: "/"
-  })))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Login__WEBPACK_IMPORTED_MODULE_1__["default"], null)))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (UnAuthenticatedApp);

@@ -7,41 +7,13 @@ axios.defaults.baseURL = 'http://setshare.test'
 
 class Home extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            loggedIn: false,
-            user: [],
-            isLoaded: false
-        };
-    }
-
-    componentDidMount() {
-        axios.get('/api/user')
-        .then(response => {
-            console.log(response);
-            this.setState({
-                user: response.data,
-                isLoaded:true
-            })
-        });
-    }
-
     render() {
-
-        if(!this.state.isLoaded){
-            return (
-                <LoadingSpinner />
-            )
-        }
-
         return (
             <div className="flex items-center">
                 <div className="md:w-1/2 md:mx-auto">
                     <div className="py-12 bg-white">
                         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="lg:text-center">
-                            <h1>{this.state.user.name}</h1>
                                 <p className="text-base leading-6 text-indigo-600 font-semibold tracking-wide uppercase">Share your sets</p>
                                 <h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
                                     Upload and download great Ableton live sets
