@@ -51922,17 +51922,27 @@ window.axios.defaults.withCredentials = true;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _context_user_context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./context/user-context */ "./resources/js/components/context/user-context.js");
-/* harmony import */ var _Authenticated_App_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Authenticated-App.js */ "./resources/js/components/Authenticated-App.js");
-/* harmony import */ var _Unauthenticated_App_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Unauthenticated-App.js */ "./resources/js/components/Unauthenticated-App.js");
+/* harmony import */ var _context_UserContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./context/UserContext */ "./resources/js/components/context/UserContext.js");
+/* harmony import */ var _context_AuthContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./context/AuthContext */ "./resources/js/components/context/AuthContext.js");
+/* harmony import */ var _Authenticated_App_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Authenticated-App.js */ "./resources/js/components/Authenticated-App.js");
+/* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Login */ "./resources/js/components/Login.js");
+/* harmony import */ var _Unauthenticated_App_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Unauthenticated-App.js */ "./resources/js/components/Unauthenticated-App.js");
+
+
 
 
 
 
 
 function App() {
-  var user = Object(_context_user_context__WEBPACK_IMPORTED_MODULE_1__["useUser"])();
-  return user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Authenticated_App_js__WEBPACK_IMPORTED_MODULE_2__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Unauthenticated_App_js__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+  var authContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AuthContext__WEBPACK_IMPORTED_MODULE_2__["AuthContext"]);
+  console.log('Global auth state', authContext.authState.authenticated, Boolean(authContext.authState.authenticated));
+
+  if (authContext.authState.authenticated == 'false' || authContext.authState.authenticated == false) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Login__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+  } else {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Authenticated_App_js__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+  }
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -51950,29 +51960,14 @@ function App() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Login */ "./resources/js/components/Login.js");
-/* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Home */ "./resources/js/components/Home.js");
-/* harmony import */ var _Test__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Test */ "./resources/js/components/Test.js");
-/* harmony import */ var _UserSets__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UserSets */ "./resources/js/components/UserSets.js");
-/* harmony import */ var _PrivateRoute__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./PrivateRoute */ "./resources/js/components/PrivateRoute.js");
-/* harmony import */ var _CreateSet__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CreateSet */ "./resources/js/components/CreateSet.js");
-/* harmony import */ var _LoadingSpinner__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./LoadingSpinner */ "./resources/js/components/LoadingSpinner.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
+/* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Login */ "./resources/js/components/Login.js");
+/* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home */ "./resources/js/components/Home.js");
+/* harmony import */ var _Test__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Test */ "./resources/js/components/Test.js");
+/* harmony import */ var _UserSets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./UserSets */ "./resources/js/components/UserSets.js");
+/* harmony import */ var _PrivateRoute__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PrivateRoute */ "./resources/js/components/PrivateRoute.js");
+/* harmony import */ var _CreateSet__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./CreateSet */ "./resources/js/components/CreateSet.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _context_AuthContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./context/AuthContext */ "./resources/js/components/context/AuthContext.js");
 
 
 
@@ -51984,12 +51979,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function AuthenticatedApp() {
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(true),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      isLoggedIn = _React$useState2[0],
-      setIsLoggedIn = _React$useState2[1];
+  console.log('authenticated app');
+  var authContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AuthContext__WEBPACK_IMPORTED_MODULE_8__["AuthContext"]);
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["useHistory"])();
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+  var logout = function logout() {
+    localStorage.removeItem('authenticated');
+    localStorage.removeItem('userData');
+    authContext.setAuthState({
+      authenticated: false,
+      userInfo: {}
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     className: "bg-indigo-500"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "md:w-1/2 md:mx-auto"
@@ -52027,41 +52030,32 @@ function AuthenticatedApp() {
     className: "hidden sm:block sm:ml-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["NavLink"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["NavLink"], {
     exact: true,
     to: "/",
     activeClassName: "bg-indigo-700",
     className: "ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out"
-  }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["NavLink"], {
+  }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["NavLink"], {
     to: "/sets",
     activeClassName: "bg-indigo-700",
     className: "ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out"
-  }, "All sets"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["NavLink"], {
+  }, "All sets"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["NavLink"], {
     to: "/test",
     activeClassName: "bg-indigo-700",
     className: "ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out"
-  }, "Test")))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Route"], {
-    path: "/login"
-  }, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Redirect"], {
-    to: {
-      pathname: "/"
-    }
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Login__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    login: login
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PrivateRoute__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, "Test"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: logout,
+    className: "ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out"
+  }, "Logout")))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Route"], {
     exact: true,
-    path: "/",
-    loggedIn: isLoggedIn
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Home__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PrivateRoute__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    path: "/test",
-    loggedIn: isLoggedIn
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Test__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PrivateRoute__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    path: "/sets",
-    loggedIn: isLoggedIn
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserSets__WEBPACK_IMPORTED_MODULE_5__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PrivateRoute__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    path: "/createset",
-    loggedIn: isLoggedIn
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CreateSet__WEBPACK_IMPORTED_MODULE_7__["default"], null)))));
+    path: "/"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Home__WEBPACK_IMPORTED_MODULE_2__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Route"], {
+    path: "/test"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Test__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Route"], {
+    path: "/sets"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserSets__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Route"], {
+    path: "/createset"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CreateSet__WEBPACK_IMPORTED_MODULE_6__["default"], null)))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (AuthenticatedApp);
@@ -52488,7 +52482,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _context_AuthContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./context/AuthContext */ "./resources/js/components/context/AuthContext.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -52506,29 +52500,22 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 axios__WEBPACK_IMPORTED_MODULE_1___default.a.defaults.baseURL = 'http://setshare.test';
 
-var Login = function Login(_ref) {
-  var login = _ref.login;
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useHistory"])();
-  var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])();
+var Login = function Login() {
+  console.log('Login');
+  var authContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AuthContext__WEBPACK_IMPORTED_MODULE_2__["AuthContext"]);
 
-  var _ref2 = location.state || {
-    from: {
-      pathname: "/"
-    }
-  },
-      from = _ref2.from;
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      email = _useState2[0],
+      setEmail = _useState2[1];
 
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(''),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      email = _React$useState2[0],
-      setEmail = _React$useState2[1];
-
-  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(''),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
-      password = _React$useState4[0],
-      setPassword = _React$useState4[1];
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      password = _useState4[0],
+      setPassword = _useState4[1];
 
   var handleSubmit = function handleSubmit(e) {
+    console.log('This is working');
     e.preventDefault();
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/sanctum/csrf-cookie').then(function (response) {
       console.log('CSRF response', response);
@@ -52536,29 +52523,39 @@ var Login = function Login(_ref) {
         email: email,
         password: password
       }).then(function (response) {
-        console.log(response.status);
+        console.log('Login post response', response);
 
         if (response.status === 200 || response.status === 204) {
-          login();
-          history.replace(from);
+          axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/user').then(function (response) {
+            console.log('This is the response from the user get', response);
+            var _response$data = response.data,
+                name = _response$data.name,
+                email = _response$data.email;
+            authContext.setAuthState({
+              authenticated: true,
+              userInfo: {
+                'name': name,
+                'email': email
+              }
+            });
+          });
         }
       });
     });
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "container mx-auto"
+    className: "container mx-auto"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "flex flex-wrap justify-center"
+    className: "flex flex-wrap justify-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "w-full max-w-sm"
+    className: "w-full max-w-sm"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "flex flex-col break-words bg-white border-2 rounded shadow-md  mt-6"
+    className: "flex flex-col break-words bg-white border-2 rounded shadow-md  mt-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "font-semibold bg-indigo-500 text-white py-3 px-6 mb-0"
   }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    className: "w-full p-6",
-    onSubmit: handleSubmit
+    className: "w-full p-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex flex-wrap mb-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -52574,7 +52571,7 @@ var Login = function Login(_ref) {
       return setEmail(e.target.value);
     },
     required: true,
-    autoocus: true
+    autoFocus: true
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex flex-wrap mb-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -52595,6 +52592,7 @@ var Login = function Login(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex flex-wrap items-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: handleSubmit,
     type: "submit",
     className: "bg-indigo-500 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
   }, "Login"))))))));
@@ -52708,7 +52706,8 @@ var Test = function Test(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _context_auth_context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./context/auth-context */ "./resources/js/components/context/auth-context.js");
+/* harmony import */ var _context_AuthContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./context/AuthContext */ "./resources/js/components/context/AuthContext.js");
+/* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Login */ "./resources/js/components/Login.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -52724,7 +52723,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function UnAuthenticatedApp() {
+  console.log('unauthenticated');
+
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(''),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       email = _React$useState2[0],
@@ -52735,61 +52737,7 @@ function UnAuthenticatedApp() {
       password = _React$useState4[0],
       setPassword = _React$useState4[1];
 
-  var _useAuth = Object(_context_auth_context__WEBPACK_IMPORTED_MODULE_1__["useAuth"])(),
-      login = _useAuth.login;
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "container mx-auto"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "flex flex-wrap justify-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "w-full max-w-sm"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    "class": "flex flex-col break-words bg-white border-2 rounded shadow-md  mt-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "font-semibold bg-indigo-500 text-white py-3 px-6 mb-0"
-  }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    className: "w-full p-6",
-    onSubmit: login
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "flex flex-wrap mb-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    htmlFor: "email",
-    className: "block text-gray-700 text-sm font-bold mb-2"
-  }, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    className: "form-input w-full shadow py-2 px-3",
-    type: "email",
-    name: "email",
-    placeholder: "",
-    value: email,
-    onChange: function onChange(e) {
-      return setEmail(e.target.value);
-    },
-    required: true,
-    autoocus: true
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "flex flex-wrap mb-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    htmlFor: "email",
-    className: "block text-gray-700 text-sm font-bold mb-2"
-  }, "Password"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    className: "form-input w-full shadow py-2 px-3",
-    type: "password",
-    name: "password",
-    placeholder: "",
-    value: password,
-    onChange: function onChange(e) {
-      return setPassword(e.target.value);
-    },
-    required: true
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "form-group row mb-0"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "flex flex-wrap items-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "submit",
-    className: "bg-indigo-500 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-  }, "Login"))))))));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You are not logged in.");
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (UnAuthenticatedApp);
@@ -52983,124 +52931,77 @@ var UserSets = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/context/auth-context.js":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/context/auth-context.js ***!
-  \*********************************************************/
-/*! exports provided: AuthProvider, useAuth */
+/***/ "./resources/js/components/context/AuthContext.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/context/AuthContext.js ***!
+  \********************************************************/
+/*! exports provided: AuthContext, AuthProvider */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthContext", function() { return AuthContext; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthProvider", function() { return AuthProvider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useAuth", function() { return useAuth; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+var AuthContext = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])();
+var Provider = AuthContext.Provider;
 
+var AuthProvider = function AuthProvider(_ref) {
+  var children = _ref.children;
+  var authenticated = localStorage.getItem('authenticated');
+  var userInfo = localStorage.getItem('userInfo');
 
-var AuthContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext();
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    authenticated: authenticated ? authenticated : false,
+    userInfo: userInfo ? JSON.parse(userInfo) : {}
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      authState = _useState2[0],
+      setAuthState = _useState2[1];
 
-function AuthProvider(props) {
-  // code for pre-loading the user's information if we have their token in
-  // localStorage goes here
-  // 🚨 this is the important bit.
-  // Normally your provider components render the context provider with a value.
-  // But we post-pone rendering any of the children until after we've determined
-  // whether or not we have a user token and if we do, then we render a spinner
-  // while we go retrieve that user's information.
-  if (false) {}
-
-  var data = ''; //   const login = () => {} // make a login request
-
-  var login = function login(email, password) {
-    var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useHistory"])();
-    var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useLocation"])();
-    console.log('hello');
-    e.preventDefault();
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/sanctum/csrf-cookie').then(function (response) {
-      console.log('CSRF response', response);
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/login', {
-        email: email,
-        password: password
-      }).then(function (response) {
-        console.log(response.status);
-
-        if (response.status === 200 || response.status === 204) {
-          login();
-          history.replace(from);
-        }
-      });
+  var setAuthInfo = function setAuthInfo(authInfo) {
+    var authenticated = authInfo.authenticated,
+        userInfo = authInfo.userInfo;
+    localStorage.setItem('authenticated', authenticated);
+    localStorage.setItem(userInfo, JSON.stringify(userInfo));
+    setAuthState({
+      authenticated: authenticated,
+      userInfo: userInfo
     });
   };
 
-  var register = function register() {}; // register the user
-
-
-  var logout = function logout() {}; // clear the token in localStorage and the user data
-  // note, I'm not bothering to optimize this `value` with React.useMemo here
-  // because this is the top-most component rendered in our app and it will very
-  // rarely re-render/cause a performance problem.
-
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AuthContext.Provider, _extends({
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Provider, {
     value: {
-      data: data,
-      login: login,
-      logout: logout,
-      register: register
+      authState: authState,
+      setAuthState: function setAuthState(authInfo) {
+        return setAuthInfo(authInfo);
+      }
     }
-  }, props));
-}
-
-var useAuth = function useAuth() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(AuthContext);
+  }, children);
 };
 
- // the UserProvider in user-context.js is basically:
-// const UserProvider = props => (
-//   <UserContext.Provider value={useAuth().data.user} {...props} />
-// )
-// and the useUser hook is basically this:
-// const useUser = () => React.useContext(UserContext)
+
 
 /***/ }),
 
-/***/ "./resources/js/components/context/auth.js":
-/*!*************************************************!*\
-  !*** ./resources/js/components/context/auth.js ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _auth_context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth-context */ "./resources/js/components/context/auth-context.js");
-/* harmony import */ var _user_context__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user-context */ "./resources/js/components/context/user-context.js");
-
-
-
-
-function AppProviders(_ref) {
-  var children = _ref.children;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_context__WEBPACK_IMPORTED_MODULE_1__["AuthProvider"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_user_context__WEBPACK_IMPORTED_MODULE_2__["UserProvider"], null, children));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (AppProviders);
-
-/***/ }),
-
-/***/ "./resources/js/components/context/user-context.js":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/context/user-context.js ***!
-  \*********************************************************/
+/***/ "./resources/js/components/context/UserContext.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/context/UserContext.js ***!
+  \********************************************************/
 /*! exports provided: UserProvider, useUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -53134,6 +53035,32 @@ var useUser = function useUser() {
 };
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/context/auth.js":
+/*!*************************************************!*\
+  !*** ./resources/js/components/context/auth.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _AuthContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AuthContext */ "./resources/js/components/context/AuthContext.js");
+/* harmony import */ var _UserContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserContext */ "./resources/js/components/context/UserContext.js");
+
+
+
+
+function AppProviders(_ref) {
+  var children = _ref.children;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AuthContext__WEBPACK_IMPORTED_MODULE_1__["AuthProvider"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserContext__WEBPACK_IMPORTED_MODULE_2__["UserProvider"], null, children));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (AppProviders);
 
 /***/ }),
 

@@ -1,23 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useContext } from 'react';
 import Login from './Login'
 import Home from './Home'
 import Test from './Test'
 import UserSets from './UserSets'
 import PrivateRoute from './PrivateRoute'
 import CreateSet from './CreateSet'
-import LoadingSpinner from './LoadingSpinner'
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     NavLink,
-    Redirect
+    Redirect,
+    useHistory
 } from "react-router-dom";
+import { AuthContext } from './context/AuthContext'
+
 
 function AuthenticatedApp() {
+    console.log('authenticated app')
+    const authContext = useContext(AuthContext)
+    const history = useHistory();
 
-    const [isLoggedIn, setIsLoggedIn] = React.useState(true)
+    const logout = () => {
+        localStorage.removeItem('authenticated');
+        localStorage.removeItem('userData');
+        authContext.setAuthState( 
+            {
+                authenticated: false,
+                userInfo:{}
+            }
+        )
+    }
 
     return (
         <div>
@@ -38,17 +51,12 @@ function AuthenticatedApp() {
                         <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                             <div className="hidden sm:block sm:ml-6">
                                 <div className="flex">
-                                    {/* {!isLoggedIn &&
-                                        <NavLink to="/login" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">Login</NavLink>
-                                    }
-                                    {isLoggedIn && */}
                                     <div>
                                         <NavLink exact={true} to="/" activeClassName="bg-indigo-700" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out">Home</NavLink>
                                         <NavLink to="/sets" activeClassName="bg-indigo-700" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out">All sets</NavLink>
                                         <NavLink to="/test" activeClassName="bg-indigo-700" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out">Test</NavLink>
-                                        {/* <button onClick={logout} className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out">Logout</button> */}
+                                        <button onClick={logout} className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition duration-150 ease-in-out">Logout</button>
                                     </div>
-                                    {/* } */}
                                 </div>
                             </div>
                         </div>
@@ -57,27 +65,18 @@ function AuthenticatedApp() {
             </nav>
 
             <Switch>
-                <Route path="/login">
-                    {isLoggedIn ?
-                        <Redirect
-                        to={{
-                            pathname: "/"
-                        }} /> :
-                        <Login login={login}/>
-                    }
-                </Route>
-                <PrivateRoute exact path="/" loggedIn={isLoggedIn}>
+                <Route exact path="/" >
                     <Home />
-                </PrivateRoute>
-                <PrivateRoute path="/test" loggedIn={isLoggedIn}>
+                </Route>
+                <Route path="/test">
                     <Test />
-                </PrivateRoute>
-                <PrivateRoute path="/sets" loggedIn={isLoggedIn}>
+                </Route>
+                <Route path="/sets" >
                     <UserSets />
-                </PrivateRoute>
-                <PrivateRoute path="/createset" loggedIn={isLoggedIn}>
+                </Route>
+                <Route path="/createset">
                     <CreateSet />
-                </PrivateRoute>
+                </Route>
             </Switch>
         </Router>
     </div>
