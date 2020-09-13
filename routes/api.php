@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->post('/set', 'SetController@store');
 
-Route::middleware('auth:sanctum')->get('/set', function () {
-    return SetResource::collection(Set::all());
+Route::middleware('auth:sanctum')->get('/set', function (Request $request) {
+    return Set::where("user_id", "=", $request->user()->id)->get();
+
 });

@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import LoadingSpinner from './LoadingSpinner'
 import {
   BrowserRouter as Router,
@@ -7,6 +8,8 @@ import {
   NavLink,
   Redirect
 } from "react-router-dom";
+
+axios.defaults.baseURL = 'http://setshare.test'
 
 class UserSets extends React.Component {
 
@@ -19,19 +22,18 @@ class UserSets extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://setshare.test/api/set")
-      .then(res => res.json())
-      .then(
-        (result) => {
+    axios.get('/api/set')
+    .then(response => {
           this.setState({
             isLoaded: true,
-            sets: result.data
+            sets: response.data
           });
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
         (error) => {
+          console.log(error)
           this.setState({
             isLoaded: true,
             error
@@ -43,9 +45,11 @@ class UserSets extends React.Component {
   render() {
 
     const { sets, isLoaded } = this.state;
+    console.log('sets', sets);
+    console.log('isLoaded', isLoaded)
 
     if (!isLoaded) {
-      <LoadingSpinner />
+      return <LoadingSpinner />
     }
 
     return (
